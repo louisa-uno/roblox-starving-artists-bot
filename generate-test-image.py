@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw
 import random
 
 
+# Function to generate a random rainbow image
 def generate_random_rainbow_image(width, height):
 	# Define rainbow colors
 	colors = [
@@ -52,9 +53,7 @@ def generate_random_rainbow_image(width, height):
 	return img
 
 
-# Generate the random rainbow image
+# Generate the random rainbow image and save it
 img = generate_random_rainbow_image(32, 32)
 output_filename_random = "starving.jpg"
 img.save(output_filename_random)
-
-output_filename_random
