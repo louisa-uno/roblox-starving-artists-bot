@@ -7,6 +7,7 @@ from PIL import Image
 from tqdm import tqdm
 
 
+# Function to simulate a mouse click at given coordinates
 def click(x, y):
 	win32api.SetCursorPos((x, y))
 	win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1, 1, 0, 0)
@@ -16,6 +17,7 @@ def click(x, y):
 	time.sleep(.01)
 
 
+# Define coordinates for various actions
 firstX, firstY = 664, 175
 lastX, lastY = 1254, 765
 openButtonX, openButtonY = 1084, 822
@@ -30,6 +32,7 @@ step = (stepX + stepY) / 2
 
 pixels = {}
 
+# Load the image and process its pixels
 imageName = input("Image name:")
 image = Image.open(imageName)
 if image.size[0] != 32 or image.size[1] != 32:
@@ -46,20 +49,24 @@ for x in range(32):
 image.close()
 
 
+# Function to convert RGB to HEX
 def rgb2hex(pixel):
 	return '{:02x}{:02x}{:02x}'.format(pixel[0], pixel[1], pixel[2])
 
 
+# Function to simulate a mouse click on a pixel
 def clickPixel(clickX, clickY):
 	click(clickX, clickY)
 
 
+# Function to quickly simulate a mouse click on a pixel
 def clickFastPixel(addX, addY):
 	clickX = round(firstX + addX * stepX)
 	clickY = round(firstY + addY * stepY)
 	clickPixel(clickX, clickY)
 
 
+# Function to check and click a pixel with a specific color
 def clickCheckPixel(addX, addY, color, s):
 	clickX = round(firstX + addX * stepX)
 	clickY = round(firstY + addY * stepY)
@@ -72,6 +79,7 @@ def clickCheckPixel(addX, addY, color, s):
 	return True
 
 
+# Function to select a color in the game
 def selectColor(color):
 	hexColor = rgb2hex(color)
 	click(openButtonX, openButtonY)
@@ -83,6 +91,7 @@ def selectColor(color):
 	click(closeButtonX, closeButtonY)
 
 
+# Main execution
 inputVar = input("Use FastPixel? ")
 
 click(closeButtonX, closeButtonY)
